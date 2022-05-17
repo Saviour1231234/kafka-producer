@@ -24,10 +24,10 @@ public class UserProducerServiceImpl implements UserProducerService {
 //        return user;
 //    }
     @Override
-    public User sendDataByDTO(UserDto userDto) {
+    public UserDto sendDataByDTO(UserDto userDto) {
         System.out.println("Producing users: " + userDto);
 
         kafkaTemplate.send("users", userDto);
-        return userMapper.fromDtoToUser(userDto);
+        return userDto;
     }
 }

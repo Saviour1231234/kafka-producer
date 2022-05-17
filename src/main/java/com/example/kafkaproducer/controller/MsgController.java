@@ -18,7 +18,7 @@ public class MsgController {
 
     private final UserProducerService producerService;
     private final KafkaTemplate<Long, UserDto> kafkaTemplate;
-//    private final UserMapper userMapper;
+    private final UserMapper userMapper;
 
 //    @PostMapping("/generate")
 //    public User generate(@RequestParam Long id,
@@ -32,10 +32,10 @@ public class MsgController {
 //        return userDto;
 //    }
     @PostMapping("/generate/dto")
-    public User generateUserFromDto(@RequestBody UserDto userDto){
+    public UserDto generateUserFromDto(@RequestBody UserDto userDto){
 
         var dataByDTO = producerService.sendDataByDTO(userDto);
-        ListenableFuture<SendResult<Long, UserDto>> future = kafkaTemplate.send("users",userDto);
+        ListenableFuture<SendResult<Long, UserDto>> future = kafkaTemplate.send("users",dataByDTO);
         future.addCallback(System.out::println,System.err::println);
         kafkaTemplate.flush();
 

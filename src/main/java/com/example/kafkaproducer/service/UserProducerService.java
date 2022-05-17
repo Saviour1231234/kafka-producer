@@ -7,5 +7,5 @@ public interface UserProducerService {
 
 //    User sendData(User user);
 
-    public User sendDataByDTO(UserDto user);
+    public UserDto sendDataByDTO(UserDto user);
 }
