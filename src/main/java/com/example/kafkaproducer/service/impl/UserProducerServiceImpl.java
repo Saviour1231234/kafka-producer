@@ -14,13 +14,20 @@ import org.springframework.stereotype.Service;
 public class UserProducerServiceImpl implements UserProducerService {
 
     @Autowired
-    private KafkaTemplate<Long, User> kafkaTemplate;
+    private KafkaTemplate<Long, UserDto> kafkaTemplate;
     private final UserMapper userMapper;
 
+//    @Override
+//    public User sendData(User user) {
+//        System.out.println("Producing users: " + user);
+//        kafkaTemplate.send("users", user);
+//        return user;
+//    }
     @Override
-    public User sendData(User user) {
-        System.out.println("Producing users: " + user);
-        kafkaTemplate.send("users", user);
-        return user;
+    public User sendDataByDTO(UserDto userDto) {
+        System.out.println("Producing users: " + userDto);
+
+        kafkaTemplate.send("users", userDto);
+        return userMapper.fromDtoToUser(userDto);
     }
 }

@@ -37,12 +37,12 @@ public class KafkaProducerConfig {
     }
 
     @Bean
-    public ProducerFactory<Long, User> producerFactory() {
+    public ProducerFactory<Long, UserDto> producerFactory() {
         return new DefaultKafkaProducerFactory<>(producerConfigs());
     }
 
     @Bean
-    public KafkaTemplate<Long, User> kafkaTemplate() {
+    public KafkaTemplate<Long, UserDto> kafkaTemplate() {
         return new KafkaTemplate<>(producerFactory());
     }
 }

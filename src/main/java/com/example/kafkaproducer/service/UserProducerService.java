@@ -5,5 +5,7 @@ import com.example.kafkaproducer.entity.User;
 
 public interface UserProducerService {
 
-    User sendData(User user);
+//    User sendData(User user);
+
+    public User sendDataByDTO(UserDto user);
 }
